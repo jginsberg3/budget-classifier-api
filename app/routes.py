@@ -23,6 +23,10 @@ def predict():
     predicted_codes = model.predict(tfidf.transform(df['description']))
     predicted_categories = [id_to_category[c] for c in predicted_codes]
     df['predicted_category'] = predicted_categories
-    df = df[['date', 'predicted_category', 'spend', 'description']]
+    
+    try:
+        df = df[['date', 'predicted_category', 'spend', 'description']]
+    except:
+        pass
 
     return df.to_json(orient='records')
